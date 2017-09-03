@@ -11,7 +11,7 @@ class Book extends Component {
                     style={{
                         width: 128,
                         height: 174,
-                        backgroundImage: 'url(' + this.props.book.imageLinks.thumbnail + ')'
+                        backgroundImage: 'url(' + (this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : '') + ')'
                     }}></div>
                 <BookActions
                     book={this.props.book}
@@ -20,9 +20,11 @@ class Book extends Component {
             </div>
             <div className="book-title">{this.props.book.title}</div>
             <div className="book-authors">
-                {this.props.book.authors.map((author) => (
+            {this.props.book.authors && (
+                this.props.book.authors.map((author) => (
                     <div key={author} className="book-author">{author}</div>
-                ))}
+                ))
+            )}
             </div>
           </div>
         );
