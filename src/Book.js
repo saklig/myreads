@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import BookActions from './BookActions'
 
 class Book extends Component {
-    state = {  }
     render() {
         return (
             <div className="book">
@@ -12,13 +11,16 @@ class Book extends Component {
                     style={{
                         width: 128,
                         height: 174,
-                        backgroundImage: 'url(' + this.props.thumbnail + ')'
+                        backgroundImage: 'url(' + this.props.book.imageLinks.thumbnail + ')'
                     }}></div>
-                <BookActions/>
+                <BookActions
+                    book={this.props.book}
+                    onShelfChange={this.props.onShelfChange}
+                />
             </div>
-            <div className="book-title">{this.props.title}</div>
+            <div className="book-title">{this.props.book.title}</div>
             <div className="book-authors">
-                {this.props.authors.map((author) => (
+                {this.props.book.authors.map((author) => (
                     <div key={author} className="book-author">{author}</div>
                 ))}
             </div>
