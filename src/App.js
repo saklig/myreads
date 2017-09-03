@@ -27,14 +27,22 @@ class BooksApp extends React.Component {
             }));            
         }
         else {
-            this.setState(() => ({
-                books: this.state.books.map((b, i) => {
-                    if (b.id === book.id) {
-                        b.shelf = shelf
-                    }
-                    return b;
+            if (this.state.books.filter((b) => b.id === book.id).length > 0) {
+                this.setState(() => ({
+                    books: this.state.books.map((b, i) => {
+                        if (b.id === book.id) {
+                            b.shelf = shelf
+                        }
+                        return b;
+                    })
+                }));
+            }
+            else {
+                this.setState(() => {
+                    book.shelf = shelf;
+                    this.state.books.push(book);
                 })
-            }));
+            }
         }
         
 
@@ -49,7 +57,9 @@ class BooksApp extends React.Component {
             <div className="app">
                 <Route path='/search' render={() => (
                     <SearchBooks
-
+                        onShelfChange={(book, shelf) => {
+                            this.onShelfChange(book, shelf);
+                        }}
                     />
                 )}
                 />
