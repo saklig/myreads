@@ -1,16 +1,44 @@
 import React, { Component } from 'react';
+import SelectListOption from './SelectListOption'
 
 class BookActions extends Component {
-    state = {  }
     render() {
         return (
             <div className="book-shelf-changer">
-                <select>
-                    <option value="none" disabled>Move to...</option>
-                    <option value="currentlyReading">Currently Reading</option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
-                    <option value="none">None</option>
+                <select
+                    onChange={(event) => {
+                        this.props.onShelfChange(this.props.book, event.target.value)
+                    }}
+                    value={this.props.book.shelf}
+                >
+                    <SelectListOption
+                        value="none"
+                        text="Move to..."
+                        disabled={true}
+                    />
+
+                    <SelectListOption
+                        value="currentlyReading"
+                        text="Currently Reading"
+                        disabled={false}
+                    />
+                    <SelectListOption
+                        value="wantToRead"
+                        text="Want to Read"
+                        disabled={false}
+                    />
+
+                    <SelectListOption
+                        value="read"
+                        text="Read"
+                        disabled={false}
+                    />
+
+                    <SelectListOption
+                        value="none"
+                        text="None"
+                        disabled={false}
+                    />
                 </select>
             </div>
         );
