@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as BooksAPI from './BooksAPI';
 import BookShelf from './BookShelf';
 
 class SearchBooks extends Component {
+    static propTypes = {
+        books: PropTypes.array.isRequired,
+        shelfTypes: PropTypes.array.isRequired,
+        onShelfChange: PropTypes.func.isRequired
+    }
     state = {
         query: '',
         searchResult: []
     }
-
     updateQuery = (query) => {
         if (query) {
             BooksAPI.search(query).then((searchResult) => {
@@ -31,7 +36,6 @@ class SearchBooks extends Component {
             state.query = query.trim();
         });
     }
-
     render() {
         return (
             <div className="search-books">
