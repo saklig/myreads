@@ -11,12 +11,13 @@ class Book extends Component {
                         style={{
                             width: 128,
                             height: 174,
-                            backgroundImage: 'url(' + (this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : '') + ')'
+                            backgroundImage: 'url(' + (this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : '') + ')'//TODO: provide a fallback image
                         }}
                     />
                     <BookActions
                         book={this.props.book}
                         onShelfChange={this.props.onShelfChange}
+                        shelfTypes={this.props.shelfTypes}
                     />
                 </div>
                 <div className="book-title">{this.props.book.title}</div>

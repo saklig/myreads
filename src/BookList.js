@@ -18,6 +18,7 @@ class BookList extends Component {
                                 books={this.props.books.filter((book) => book.shelf === shelfType.value)}
                                 shelf={shelfType.value}
                                 onShelfChange={this.props.onShelfChange}
+                                shelfTypes={this.props.shelfTypes}
                             />
                         ))}
                     </div>
