@@ -9,15 +9,17 @@ class BookActions extends Component {
         onShelfChange: PropTypes.func.isRequired
     }
     render() {
+        const { book, shelfTypes, onShelfChange } = this.props;
+
         return (
             <div className="book-shelf-changer">
                 <select
                     onChange={(event) => {
-                        this.props.onShelfChange(this.props.book, event.target.value);
+                        onShelfChange(book, event.target.value);
                     }}
-                    value={(this.props.shelfTypes.filter((s) => s.value === this.props.book.shelf).length > 0 ? this.props.book.shelf : 'none')}
+                    value={(shelfTypes.filter((s) => s.value === book.shelf).length > 0 ? book.shelf : 'none')}
                 >
-                    {this.props.shelfTypes.map((shelfType, i) => (
+                    {shelfTypes.map((shelfType, i) => (
                         <SelectListOption
                             key={i}
                             value={shelfType.value}

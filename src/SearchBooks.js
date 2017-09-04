@@ -15,10 +15,12 @@ class SearchBooks extends Component {
         searchResult: []
     }
     updateQuery = (query) => {
+        const { books } = this.props;
+
         if (query) {
             BooksAPI.search(query).then((searchResult) => {
                 searchResult.forEach(function(s) {
-                    this.props.books.forEach(function(b) {
+                    books.forEach(function(b) {
                         if (s.id === b.id) {
                             s.shelf = b.shelf;
                         }
@@ -37,6 +39,9 @@ class SearchBooks extends Component {
         });
     }
     render() {
+        const { shelfTypes, onShelfChange } = this.props;
+        const { query, searchResult } = this.state;
+
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -45,7 +50,7 @@ class SearchBooks extends Component {
                         <input
                             type="text"
                             placeholder="Search by title or author"
-                            value={this.state.query}
+                            value={query}
                             onChange={(event) => this.updateQuery(event.target.value)}
                         />
                     </div>
@@ -53,10 +58,10 @@ class SearchBooks extends Component {
                 <div className="search-books-results">
                     <BookShelf
                         title='Result'
-                        books={this.state.searchResult}
+                        books={searchResult}
                         shelf='result'
-                        onShelfChange={this.props.onShelfChange}
-                        shelfTypes={this.props.shelfTypes}
+                        onShelfChange={onShelfChange}
+                        shelfTypes={shelfTypes}
                     />
                 </div>
             </div>

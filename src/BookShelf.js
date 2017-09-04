@@ -11,19 +11,21 @@ class BookShelf extends Component {
         onShelfChange: PropTypes.func.isRequired
     }
     render() {
+        const { title, shelf, books, shelfTypes, onShelfChange } = this.props;
+
         return (
             <div className="bookshelf">
-                <h2 className="bookshelf-title">{this.props.title}</h2>
+                <h2 className="bookshelf-title">{title}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        {this.props.books && this.props.books.length > 0 ? (
-                            this.props.books.map((book) => (
+                        {books && books.length > 0 ? (
+                            books.map((book) => (
                             <li key={book.id}>
                                 <Book
-                                    shelf={this.props.shelf}
+                                    shelf={shelf}
                                     book={book}
-                                    onShelfChange={this.props.onShelfChange}
-                                    shelfTypes={this.props.shelfTypes}
+                                    onShelfChange={onShelfChange}
+                                    shelfTypes={shelfTypes}
                                 />
                             </li>
                         ))) : (

@@ -9,6 +9,8 @@ class Book extends Component {
         onShelfChange: PropTypes.func.isRequired
     }
     render() {
+        const { book, shelfTypes, onShelfChange } = this.props;
+
         return (
             <div className="book">
                 <div className="book-top">
@@ -17,19 +19,19 @@ class Book extends Component {
                         style={{
                             width: 128,
                             height: 174,
-                            backgroundImage: 'url(' + (this.props.book.imageLinks ? this.props.book.imageLinks.thumbnail : '') + ')'//TODO: provide a fallback image
+                            backgroundImage: 'url(' + (book.imageLinks ? book.imageLinks.thumbnail : '') + ')'//TODO: provide a fallback image
                         }}
                     />
                     <BookActions
-                        book={this.props.book}
-                        onShelfChange={this.props.onShelfChange}
-                        shelfTypes={this.props.shelfTypes}
+                        book={book}
+                        onShelfChange={onShelfChange}
+                        shelfTypes={shelfTypes}
                     />
                 </div>
-                <div className="book-title">{this.props.book.title}</div>
+                <div className="book-title">{book.title}</div>
                 <div className="book-authors">
-                    {this.props.book.authors && (
-                        this.props.book.authors.map((author) => (
+                    {book.authors && (
+                        book.authors.map((author) => (
                             <div key={author} className="book-author">{author}</div>
                         ))
                     )}

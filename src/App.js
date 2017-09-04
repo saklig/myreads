@@ -58,11 +58,13 @@ class BooksApp extends React.Component {
             { text: 'Read', value: 'read', enabled: true, isShelf: true },
             { text: 'None', value: 'none', enabled: true, isShelf: false }
         ];
+        const { books } = this.state;
+
         return (
             <div className="app">
                 <Route path='/search' render={() => (
                     <SearchBooks
-                        books={this.state.books}
+                        books={books}
                         onShelfChange={(book, shelf) => {
                             this.onShelfChange(book, shelf);
                         }}
@@ -72,7 +74,7 @@ class BooksApp extends React.Component {
                 />
                 <Route exact path='/' render={() => (
                     <BookList
-                        books={this.state.books}
+                        books={books}
                         onShelfChange={(book, shelf) => {
                             this.onShelfChange(book, shelf);
                         }}

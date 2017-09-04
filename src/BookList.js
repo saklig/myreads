@@ -10,6 +10,7 @@ class BookList extends Component {
         onShelfChange: PropTypes.func.isRequired
     }
     render() {
+        const { books, shelfTypes, onShelfChange } = this.props;
         return (
             <div className="list-books">
                 <div className="list-books-title">
@@ -17,14 +18,14 @@ class BookList extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        {this.props.shelfTypes.filter((shelfType) => shelfType.isShelf).map((shelfType,i) => (
+                        {shelfTypes.filter((shelfType) => shelfType.isShelf).map((shelfType,i) => (
                             <BookShelf
                                 key={i}
                                 title={shelfType.text}
-                                books={this.props.books.filter((book) => book.shelf === shelfType.value)}
+                                books={books.filter((book) => book.shelf === shelfType.value)}
                                 shelf={shelfType.value}
-                                onShelfChange={this.props.onShelfChange}
-                                shelfTypes={this.props.shelfTypes}
+                                onShelfChange={onShelfChange}
+                                shelfTypes={shelfTypes}
                             />
                         ))}
                     </div>

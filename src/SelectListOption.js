@@ -8,11 +8,13 @@ class SelectListOption extends Component {
         disabled: PropTypes.bool.isRequired
     }
     render() {
+        const { text, value, disabled } = this.props;
+
         return (
             <option
-                value={this.props.value}
-                disabled={!this.props.disabled}
-            >{this.props.text}</option>
+                value={value}
+                disabled={!disabled}
+            >{text}</option>
         );
     }
 }
