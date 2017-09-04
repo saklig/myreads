@@ -20,7 +20,7 @@ class BooksApp extends React.Component {
         });
     }
   
-    //TODO: this seems very messy, clean it up
+    //TODO: this seems messy, clean at some point
     onShelfChange(book, shelf) {
         if (shelf === 'none') {
             this.setState(() => ({
@@ -47,7 +47,7 @@ class BooksApp extends React.Component {
         }
 
         BooksAPI.update(book, shelf);
-    //TODO: errorhandling
+        //TODO: errorhandling
     }
 
     render() {
