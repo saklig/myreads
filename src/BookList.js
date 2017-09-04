@@ -11,24 +11,15 @@ class BookList extends Component {
                 </div>
                 <div className="list-books-content">
                     <div>
-                        <BookShelf
-                            title='Currently Reading'
-                            books={this.props.books.filter((book) => book.shelf === 'currentlyReading')}
-                            shelf='currentlyReading'
-                            onShelfChange={this.props.onShelfChange}
-                        />
-                        <BookShelf
-                            title='Want to Read'
-                            books={this.props.books.filter((book) => book.shelf === 'wantToRead')}
-                            shelf='wantToRead'
-                            onShelfChange={this.props.onShelfChange}
-                        />
-                        <BookShelf
-                            title='Read'
-                            books={this.props.books.filter((book) => book.shelf === 'read')}
-                            shelf='read'
-                            onShelfChange={this.props.onShelfChange}
-                        />
+                        {this.props.shelfTypes.filter((shelfType) => shelfType.isShelf).map((shelfType,i) => (
+                            <BookShelf
+                                key={i}
+                                title={shelfType.text}
+                                books={this.props.books.filter((book) => book.shelf === shelfType.value)}
+                                shelf={shelfType.value}
+                                onShelfChange={this.props.onShelfChange}
+                            />
+                        ))}
                     </div>
                 </div>
                 <div className="open-search">

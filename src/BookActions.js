@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SelectListOption from './SelectListOption'
+import SelectListOption from './SelectListOption';
 
 class BookActions extends Component {
     render() {
@@ -7,38 +7,18 @@ class BookActions extends Component {
             <div className="book-shelf-changer">
                 <select
                     onChange={(event) => {
-                        this.props.onShelfChange(this.props.book, event.target.value)
+                        this.props.onShelfChange(this.props.book, event.target.value);
                     }}
-                    value={this.props.book.shelf}
+                    value={(this.props.shelfTypes.filter((s) => s.value === this.props.book.shelf).length > 0 ? this.props.book.shelf : 'none')}
                 >
-                    <SelectListOption
-                        value="none"
-                        text="Move to..."
-                        disabled={true}
-                    />
-
-                    <SelectListOption
-                        value="currentlyReading"
-                        text="Currently Reading"
-                        disabled={false}
-                    />
-                    <SelectListOption
-                        value="wantToRead"
-                        text="Want to Read"
-                        disabled={false}
-                    />
-
-                    <SelectListOption
-                        value="read"
-                        text="Read"
-                        disabled={false}
-                    />
-
-                    <SelectListOption
-                        value="none"
-                        text="None"
-                        disabled={false}
-                    />
+                    {this.props.shelfTypes.map((shelfType, i) => (
+                        <SelectListOption
+                            key={i}
+                            value={shelfType.value}
+                            text={shelfType.text}
+                            disabled={shelfType.enabled}
+                        />
+                    ))}
                 </select>
             </div>
         );

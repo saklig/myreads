@@ -5,7 +5,7 @@ class SelectListOption extends Component {
         return (
             <option
                 value={this.props.value}
-                disabled={this.props.disabled}
+                disabled={!this.props.disabled}
             >{this.props.text}</option>
         );
     }
