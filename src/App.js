@@ -19,9 +19,9 @@ class BooksApp extends React.Component {
             this.setState({ books });
         });
     }
-
+  
+    //TODO: this seems very messy, clean it up
     onShelfChange(book, shelf) {
-        //TODO: this seems very messy, clean it up
         if (shelf === 'none') {
             this.setState(() => ({
                 books: this.state.books.filter((b) => b.id !== book.id)
@@ -45,12 +45,9 @@ class BooksApp extends React.Component {
                 });
             }
         }
-        
 
-        
-        BooksAPI.update(book, shelf).then((book) => {
-            //TODO: success, but what about error, should catch that undo action against local array and make user aware update failed
-        });
+        BooksAPI.update(book, shelf);
+    //TODO: errorhandling
     }
 
     render() {
