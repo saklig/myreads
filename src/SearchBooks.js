@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as BooksAPI from './BooksAPI'
-import BookShelf from './BookShelf'
+import * as BooksAPI from './BooksAPI';
+import BookShelf from './BookShelf';
 
 class SearchBooks extends Component {
     state = {
@@ -12,6 +12,14 @@ class SearchBooks extends Component {
     updateQuery = (query) => {
         if (query) {
             BooksAPI.search(query).then((searchResult) => {
+                searchResult.forEach(function(s) {
+                    this.props.books.forEach(function(b) {
+                        if (s.id === b.id) {
+                            s.shelf = b.shelf;
+                        }
+                    }, this);
+                }, this);
+
                 this.setState({searchResult: searchResult});
             });
         }
@@ -21,8 +29,7 @@ class SearchBooks extends Component {
 
         this.setState((state) => {
             state.query = query.trim();
-            console.log(query);
-        })
+        });
     }
 
     render() {
@@ -53,9 +60,8 @@ class SearchBooks extends Component {
                         books={this.state.searchResult}
                         shelf='result'
                         onShelfChange={this.props.onShelfChange}
+                        shelfTypes={this.props.shelfTypes}
                     />
-
-                    <ol className="books-grid"></ol>
                 </div>
             </div>
         );
